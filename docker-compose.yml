@@ -1,0 +1,12 @@
+# Lab only. Docker Desktop hides host modems, so bonding cannot see usb0.
+services:
+  leocastra-rist-bond:
+    build: .
+    image: leocastra-rist-bond
+    container_name: leocastra-rist-bond
+    ports:
+      - "8089:8089"
+      - "4011:4011/udp"
+    volumes:
+      - ./data:/var/lib/leocastra-rist
+    restart: unless-stopped

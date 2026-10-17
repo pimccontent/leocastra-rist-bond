@@ -1,0 +1,21 @@
+# Local OBS proof. Two RIST paths on loopback inside the container.
+# OBS on the host calls srt://127.0.0.1:4011. The joined picture is UDP 6000.
+services:
+  bond:
+    build: .
+    ports:
+      - "127.0.0.1:4011:4011/udp"
+      - "6000:6000/udp"
+      - "8089:8089"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      RIST_BOND_LOOPBACK: "1"
+      RIST_BOND_HOST: "host.docker.internal"
+      RIST_BOND_JOIN: "0"
+      RIST_BOND_JOIN_PORT: "6000"
+      RIST_BOND_BASE: "18180"
+      RIST_BOND_LISTEN: "4011"
+      RIST_BOND_BUFFER: "2000"
+    cap_add:
+      - NET_ADMIN

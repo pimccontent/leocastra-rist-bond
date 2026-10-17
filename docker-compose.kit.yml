@@ -1,0 +1,11 @@
+# Ubuntu kit. Host networking keeps each modem address visible to ristsender.
+# Ubuntu kit. Host networking keeps each modem address visible.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.kit.yml up -d --build
+services:
+  leocastra-rist-bond:
+    network_mode: host
+    ports: !reset []
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    restart: always

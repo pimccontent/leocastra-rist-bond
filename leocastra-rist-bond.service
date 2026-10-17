@@ -1,0 +1,19 @@
+[Unit]
+Description=LeoCastra RIST Bond
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/leocastra-rist-bond
+Environment=CONFIG_DIR=/var/lib/leocastra-rist
+Environment=WEB_ROOT=/opt/leocastra-rist-bond/web
+Environment=STATUS_PORT=8089
+Environment=FFMPEG_BIN=ffmpeg
+Environment=RISTSENDER_BIN=ristsender
+ExecStart=/usr/bin/python3 /opt/leocastra-rist-bond/status-server.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
